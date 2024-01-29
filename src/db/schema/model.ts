@@ -42,10 +42,5 @@ export const modelRelations = relations(model, ({ many }) => ({
   photo: many(photo),
 }));
 
-// export const modelRelations = relations(model, ({ one, many }) => ({
-//   pastExperiences: many(pastExperience, {
-//     fields: [model.modelId],
-//     references: [pastExperience.modelId],
-//   }),
-//   photos: many(photo, { fields: [model.modelId], references: [photo.modelId] }),
-// }));
+export type Model = typeof model.$inferSelect;
+export type NewModel = typeof model.$inferInsert;

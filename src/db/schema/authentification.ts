@@ -26,3 +26,6 @@ export const authentificationRelations = relations(
     }),
   }),
 );
+
+export type Authentification = typeof authentification.$inferSelect;
+export type NewAuthentification = typeof authentification.$inferInsert;

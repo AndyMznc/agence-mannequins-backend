@@ -20,3 +20,6 @@ export const addressRelations = relations(address, ({ one }) => ({
     references: [toApply.toApplyId],
   }),
 }));
+
+export type Address = typeof address.$inferSelect;
+export type NewAddress = typeof address.$inferInsert;

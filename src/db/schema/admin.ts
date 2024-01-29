@@ -15,3 +15,6 @@ export const admin = mysqlTable(`admin`, {
   updatedAt: datetime('updatedAt'),
   deletedAt: datetime('deletedAt'),
 });
+
+export type Admin = typeof admin.$inferSelect;
+export type NewAdmin = typeof admin.$inferInsert;

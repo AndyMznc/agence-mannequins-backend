@@ -15,3 +15,6 @@ export const pastExperienceRelations = relations(pastExperience, ({ one }) => ({
     references: [model.modelId],
   }),
 }));
+
+export type PastExperience = typeof pastExperience.$inferSelect;
+export type NewPastExperience = typeof pastExperience.$inferInsert;

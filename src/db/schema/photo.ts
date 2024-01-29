@@ -14,3 +14,6 @@ export const photoRelations = relations(photo, ({ one }) => ({
     references: [model.modelId],
   }),
 }));
+
+export type Photo = typeof photo.$inferSelect;
+export type NewPhoto = typeof photo.$inferInsert;
