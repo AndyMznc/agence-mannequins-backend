@@ -1,11 +1,38 @@
-import { int, mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
+import {
+  int,
+  mysqlEnum,
+  mysqlTable,
+  text,
+  varchar,
+} from 'drizzle-orm/mysql-core';
 
 export const model = mysqlTable('model', {
-  id: serial('id').primaryKey(),
+  modelId: int(`model_id`).primaryKey().autoincrement(),
   firstName: varchar('first_name', { length: 64 }).notNull(),
   lastName: varchar('last_name', { length: 64 }).notNull(),
   age: int('age').notNull(),
   description: text('description'),
   height: int('height').notNull(),
   weight: int('weight').notNull(),
+
+  genderEnum: mysqlEnum('gender', ['Male', 'Female', 'Other']).notNull(),
+
+  eyesColorEnum: mysqlEnum('eyesColor', [
+    'blue',
+    'green',
+    'brown',
+    'grey',
+    'black',
+    'heterochromia',
+  ]).notNull(),
+
+  hairColorEnum: mysqlEnum('hairColor', [
+    'blond',
+    'brunette',
+    'red',
+    'black',
+    'white',
+    'grey',
+    'bald',
+  ]).notNull(),
 });

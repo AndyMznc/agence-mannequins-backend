@@ -3,7 +3,7 @@ import { migrate } from 'drizzle-orm/mysql2/migrator';
 import mysql from 'mysql2';
 
 const main = async () => {
-  const poolConnection = mysql.createPool({
+  const poolConnection = await mysql.createPool({
     host: process.env.DB_HOST as string,
     user: process.env.DB_USER as string | undefined,
     password: process.env.DB_PASSWORD,
