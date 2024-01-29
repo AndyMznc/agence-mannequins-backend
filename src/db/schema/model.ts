@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
   int,
   mysqlEnum,
@@ -5,6 +6,8 @@ import {
   text,
   varchar,
 } from 'drizzle-orm/mysql-core';
+import { pastExperience } from './pastExperience';
+import { photo } from './photo';
 
 export const model = mysqlTable('model', {
   modelId: int(`model_id`).primaryKey().autoincrement(),
@@ -14,9 +17,7 @@ export const model = mysqlTable('model', {
   description: text('description'),
   height: int('height').notNull(),
   weight: int('weight').notNull(),
-
   genderEnum: mysqlEnum('gender', ['Male', 'Female', 'Other']).notNull(),
-
   eyesColorEnum: mysqlEnum('eyesColor', [
     'blue',
     'green',
@@ -25,7 +26,6 @@ export const model = mysqlTable('model', {
     'black',
     'heterochromia',
   ]).notNull(),
-
   hairColorEnum: mysqlEnum('hairColor', [
     'blond',
     'brunette',
@@ -36,3 +36,16 @@ export const model = mysqlTable('model', {
     'bald',
   ]).notNull(),
 });
+
+export const modelRelations = relations(model, ({ many }) => ({
+  pastExperience: many(pastExperience),
+  photo: many(photo),
+}));
+
+// export const modelRelations = relations(model, ({ one, many }) => ({
+//   pastExperiences: many(pastExperience, {
+//     fields: [model.modelId],
+//     references: [pastExperience.modelId],
+//   }),
+//   photos: many(photo, { fields: [model.modelId], references: [photo.modelId] }),
+// }));

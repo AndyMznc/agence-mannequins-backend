@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   int,
@@ -5,6 +6,7 @@ import {
   text,
   varchar,
 } from 'drizzle-orm/mysql-core';
+import { address } from './address';
 
 export const toApply = mysqlTable(`toApply`, {
   toApplyId: int(`toApply_id`).primaryKey().autoincrement(),
@@ -17,3 +19,10 @@ export const toApply = mysqlTable(`toApply`, {
   weight: int('weight').notNull(),
   availability: boolean('availability').default(false),
 });
+
+export const toApplyRelations = relations(toApply, ({ one }) => ({
+  address: one(address, {
+    fields: [toApply.toApplyId],
+    references: [address.toApplyId],
+  }),
+}));

@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import { int, mysqlTable, text, varchar } from 'drizzle-orm/mysql-core';
 import { model } from './model';
 
@@ -7,3 +8,10 @@ export const pastExperience = mysqlTable(`pastExperience`, {
   description: text('description'),
   modelId: int('model_id').references(() => model.modelId),
 });
+
+export const pastExperienceRelations = relations(pastExperience, ({ one }) => ({
+  model: one(model, {
+    fields: [pastExperience.modelId],
+    references: [model.modelId],
+  }),
+}));
